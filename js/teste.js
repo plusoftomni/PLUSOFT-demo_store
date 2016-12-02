@@ -391,19 +391,19 @@
  * Default functionality for the notification worker
  */
 dynaform.onload(function(scope) {
-	if ( window.top.inPaaS != undefined) {
-		$(window).blur(function(){
-			if (window.top.inPaaS.notification==undefined) return;
+	// if ( window.top.inPaaS != undefined) {
+	// 	$(window).blur(function(){
+	// 		if (window.top.inPaaS.notification==undefined) return;
 			
-			window.top.inPaaS.notification.worker.pause();
-		});
+	// 		window.top.inPaaS.notification.worker.pause();
+	// 	});
 		
-		$(window).focus(function(){
-			if (window.top.inPaaS.notification==undefined) return;
+	// 	$(window).focus(function(){
+	// 		if (window.top.inPaaS.notification==undefined) return;
 			
-			window.top.inPaaS.notification.worker.unpause();
-		});
-	}
+	// 		window.top.inPaaS.notification.worker.unpause();
+	// 	});
+	// }
 
 	var msg = $("div[role=messages-feed] span[role=error-message]").text();
 	if(msg && msg!="") {
@@ -562,8 +562,8 @@ dynaform.filter = function($target, options) {
 			if (formtoggle == "modal") {
 				window.dynaform.modal(formtarget, rowid);
 				
-			} else if (formtoggle == "static-top" && window.top.inPaaS) {
-				window.top.inPaaS.menu.open(formtarget, rowid);
+			// } else if (formtoggle == "static-top" && window.top.inPaaS) {
+				// window.top.inPaaS.menu.open(formtarget, rowid);
 				
 			} else {
 				window.dynaform.load(formtarget, rowid);
@@ -881,9 +881,9 @@ dynaform.filter = function($target, options) {
 })(jQuery);
 
 /* fix for notify */
-try {
-	if (window.top.jQuery.notify) $.notify = window.top.jQuery.notify;
-} catch(e) {}
+// try {
+// 	if (window.top.jQuery.notify) $.notify = window.top.jQuery.notify;
+// } catch(e) {}
 
 /* debounce */
 function debounce(func, wait, immediate) {
@@ -969,8 +969,8 @@ function debounce(func, wait, immediate) {
 			if (global.dynaform !== undefined && $form.length > 0) 
 				global.dynaform.init($form); 
 				
-			if (window.top && window.top.inPaaS) 					
-				window.top.inPaaS.iframeload( $form.attr("form-key"), $form.find("[record-id]").val() );
+			// if (window.top && window.top.inPaaS) 					
+				// window.top.inPaaS.iframeload( $form.attr("form-key"), $form.find("[record-id]").val() );
 		} catch(e) {
 			
 		}
