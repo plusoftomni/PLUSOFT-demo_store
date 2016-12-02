@@ -1,0 +1,103 @@
+// @media (min-width : 320px) {}
+// @media (min-width : 480px) {}
+// xs
+// @media (min-width : 768px) {}
+// sm
+// @media (min-width : 992px) {}
+// md
+// @media (min-width : 1200px) {}
+// lg
+
+@media (max-width : 992px) {
+  .logo {
+    text-align: center;
+    img {
+      display: inherit;
+    }
+  }
+}
+@media (min-width: 768px) {
+  .middle-header {
+    .btn-search {
+      margin-left: -2px !important;
+    }
+  }
+  .navbar {
+    .navbar-collapse {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+  .dropdown-submenu > a:after {
+    display: block;
+    font-family: 'fontAwesome';
+    content: "\f0da";
+    float: right;
+    margin-right: -10px;
+  }
+  .chooser {
+    position: fixed;
+    z-index: 999;
+    top: 100px;
+    right: 0;
+    @include transition(all 100ms ease-in-out 0s);
+  }
+  .chooser-hide {
+    right: -120px;
+  }
+  .chooser-toggle {
+    position: absolute;
+    top: 0;
+    left: -38px;
+    width: 20px;
+    height: 20px;
+    button:hover,
+    button:focus,
+    button:active {
+      border-color: #eea236;
+      outline: 0 !important;
+    }
+  }
+  .chooser-content {
+    width: 120px;
+    padding: 10px;
+    border: 3px solid #eea236;
+    background: #fff;
+    select {
+      height: 30px;
+    }
+  }
+}
+@media (max-width : 768px) {
+  .dropdown-submenu {
+    > .dropdown-menu {
+      padding-left: 15px;
+    }
+    > a:after {
+      display: inline-block;
+      font-family: 'fontAwesome';
+      content: "\f0d7";
+      margin-left: 10px;
+    }
+  }
+  .input-qty .bootstrap-touchspin {
+    width: 115px;
+  }
+  .table-compare > tbody > tr > td {
+    white-space: inherit !important;
+  }
+  .chooser {
+    display: none;
+  }
+}
+@media (max-width : 480px) {
+  .box-product-outer {
+    padding: 0 !important;
+    &:hover {
+      border-color: transparent;
+    }
+  }
+  .box-product .img-wrapper > .option {
+    bottom: 0;
+  }
+}
