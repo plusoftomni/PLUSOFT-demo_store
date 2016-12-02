@@ -1057,34 +1057,34 @@ dynaform.filter = function($target, options) {
         // ctrl.setReady(false);
 
         
-		ngDynaForm.directive('inpaasFormInclude', function() {
-			var contentUrl;
+		// ngDynaForm.directive('inpaasFormInclude', function() {
+		// 	var contentUrl;
 
-			return {
-				restrict : "E",
-				scope : false,
-				replace : true,
-				link : function($scope, element, attrs) {
-                  	var formId = attrs["formId"];
-					var ctrlProto = Object.getPrototypeOf($scope.formController);
-                  	dynaform.ngRequire(formId, $scope, ctrlProto);
+		// 	return {
+		// 		restrict : "E",
+		// 		scope : false,
+		// 		replace : true,
+		// 		link : function($scope, element, attrs) {
+  //                 	var formId = attrs["formId"];
+		// 			var ctrlProto = Object.getPrototypeOf($scope.formController);
+  //                 	dynaform.ngRequire(formId, $scope, ctrlProto);
 
-                  	// add the css to head
-                    var ssref=document.createElement("link");
-                    ssref.setAttribute("rel", "stylesheet")
-                    ssref.setAttribute("type", "text/css")
-                    ssref.setAttribute("href", "/includes/" + formId + "/css/" + formId + ".css")
+  //                 	// add the css to head
+  //                   var ssref=document.createElement("link");
+  //                   ssref.setAttribute("rel", "stylesheet")
+  //                   ssref.setAttribute("type", "text/css")
+  //                   ssref.setAttribute("href", "/includes/" + formId + "/css/" + formId + ".css")
 
-                    if (typeof(ssref)!="undefined")
-                        document.getElementsByTagName("head")[0].appendChild(ssref)
+  //                   if (typeof(ssref)!="undefined")
+  //                       document.getElementsByTagName("head")[0].appendChild(ssref)
                   
-                },
-				templateUrl : function(elem, attrs) {
-					return '/forms/' + attrs["formId"];
+  //               },
+		// 		templateUrl : function(elem, attrs) {
+		// 			return '/forms/' + attrs["formId"];
 
-				}
-			}
-		})
+		// 		}
+		// 	}
+		// })
 
 		ngDynaForm.controller("DynaFormController", [ '$scope', ctrl ]);
       	
