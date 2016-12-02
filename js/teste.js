@@ -49,50 +49,50 @@
 	 * Load a Form using ajax, send the content to the callback and load the initial script.
 	 * window.dynaform.load(formkey, recordid, callback)
 	 */
-	window.dynaform.load = function(formkey, recordid, params, callback) {
-		if (typeof(params) == "function") {
-			callback = params;
-			params = null;
-		}
+	// window.dynaform.load = function(formkey, recordid, params, callback) {
+	// 	if (typeof(params) == "function") {
+	// 		callback = params;
+	// 		params = null;
+	// 	}
 		
-		if (arguments.length == 1) {
-			var furl = formkey;
+	// 	if (arguments.length == 1) {
+	// 		var furl = formkey;
 			
-			/* ga-code (dynaform-load) */
-			ga('send', 'event', 'dynaform', 'load', { "url": furl });
+	// 		/* ga-code (dynaform-load) */
+	// 		ga('send', 'event', 'dynaform', 'load', { "url": furl });
 
-			window.location.href = furl;
+	// 		window.location.href = furl;
 			
-		} else if (callback == null) {
-			if (recordid == undefined) recordid = "";
+	// 	} else if (callback == null) {
+	// 		if (recordid == undefined) recordid = "";
 			
-			/* ga-code (dynaform-load) */
-			ga('send', 'event', 'dynaform', 'load', { "form": formkey, "record-id": recordid });
+	// 		/* ga-code (dynaform-load) */
+	// 		ga('send', 'event', 'dynaform', 'load', { "form": formkey, "record-id": recordid });
 
-			var furl = "/forms/" + formkey + "/" + recordid;
-			if (params != null) furl += "?" + $.param(params);
+	// 		var furl = "/forms/" + formkey + "/" + recordid;
+	// 		if (params != null) furl += "?" + $.param(params);
 
-			window.location.href = furl;
+	// 		window.location.href = furl;
 
 			
-		} else if (callback != null) {
-			if (recordid == undefined) recordid = "";
+	// 	} else if (callback != null) {
+	// 		if (recordid == undefined) recordid = "";
 
-			/* ga-code (dynaform-load) */
-			ga('send', 'event', 'dynaform', 'load', { "form": formkey, "record-id": recordid });
+	// 		/* ga-code (dynaform-load) */
+	// 		ga('send', 'event', 'dynaform', 'load', { "form": formkey, "record-id": recordid });
 			
-			var furl = "/forms/" + formkey + "/" + recordid;
-			dynaform.ajax({ url: furl, type: "GET", cache: false, dataType: "html" }, function(data, textStatus, jqXHR) {
-				var $page = $(data);
+	// 		var furl = "/forms/" + formkey + "/" + recordid;
+	// 		dynaform.ajax({ url: furl, type: "GET", cache: false, dataType: "html" }, function(data, textStatus, jqXHR) {
+	// 			var $page = $(data);
 				
-	          	// Load the form content (callback could return the form scope, to run the script)
-				callback($page[0]);
+	//           	// Load the form content (callback could return the form scope, to run the script)
+	// 			callback($page[0]);
 				
-			});
+	// 		});
 			
-		}
+	// 	}
 		
-	};
+	// };
 	
 	window.dynaform.modal = function(formkey, recordid, options) {
 		var opts = $.extend({
@@ -819,31 +819,31 @@ dynaform.filter = function($target, options) {
 		
 	}
 	
-	$.fn.save = function() {
+	// $.fn.save = function() {
 		
-	}
+	// }
 	
-	$.fn.getFormData = function() {
-		var jd = this.serializeArray().concat(this.find("input[type=checkbox]:not(:checked):not(:disabled)").map(function() { return { "name": this.name, "value": this.value=="Y" ? "N" : "" }}).get());
+	// $.fn.getFormData = function() {
+	// 	var jd = this.serializeArray().concat(this.find("input[type=checkbox]:not(:checked):not(:disabled)").map(function() { return { "name": this.name, "value": this.value=="Y" ? "N" : "" }}).get());
 
-		$("select[multiple]:not(:disabled)").each(function(index, el) {
-			if($(el).val()==null) {
-				jd = jd.concat({ "name": el.name, "value": "" });
-			}
-		});
+	// 	$("select[multiple]:not(:disabled)").each(function(index, el) {
+	// 		if($(el).val()==null) {
+	// 			jd = jd.concat({ "name": el.name, "value": "" });
+	// 		}
+	// 	});
 		
-		this.find("input[data-type=file-upload]").each(function(index, el) {
-			/*jd.concat({ "name": el.name, "value":  })
+	// 	this.find("input[data-type=file-upload]").each(function(index, el) {
+	// 		/*jd.concat({ "name": el.name, "value":  })
 			
-	      	formData.append("storage", storageId);
-	      	formData.append("f" + uploadId, el);
-	      	*/
+	//       	formData.append("storage", storageId);
+	//       	formData.append("f" + uploadId, el);
+	//       	*/
 
-		});
+	// 	});
 		
 		
-		return jd;
-	}
+	// 	return jd;
+	// }
 	
 	// $.fn.dynaform.defaults = {
 
