@@ -391,19 +391,19 @@
  * Default functionality for the notification worker
  */
 dynaform.onload(function(scope) {
-	// if ( window.top.inPaaS != undefined) {
-	// 	$(window).blur(function(){
-	// 		if (window.top.inPaaS.notification==undefined) return;
+	if ( window.top.inPaaS != undefined) {
+		$(window).blur(function(){
+			if (window.top.inPaaS.notification==undefined) return;
 			
-	// 		window.top.inPaaS.notification.worker.pause();
-	// 	});
+			window.top.inPaaS.notification.worker.pause();
+		});
 		
-	// 	$(window).focus(function(){
-	// 		if (window.top.inPaaS.notification==undefined) return;
+		$(window).focus(function(){
+			if (window.top.inPaaS.notification==undefined) return;
 			
-	// 		window.top.inPaaS.notification.worker.unpause();
-	// 	});
-	// }
+			window.top.inPaaS.notification.worker.unpause();
+		});
+	}
 
 	var msg = $("div[role=messages-feed] span[role=error-message]").text();
 	if(msg && msg!="") {
@@ -562,8 +562,8 @@ dynaform.filter = function($target, options) {
 			if (formtoggle == "modal") {
 				window.dynaform.modal(formtarget, rowid);
 				
-			// } else if (formtoggle == "static-top" && window.top.inPaaS) {
-				// window.top.inPaaS.menu.open(formtarget, rowid);
+			} else if (formtoggle == "static-top" && window.top.inPaaS) {
+				window.top.inPaaS.menu.open(formtarget, rowid);
 				
 			} else {
 				window.dynaform.load(formtarget, rowid);
