@@ -995,36 +995,36 @@ dynaform.filter = function($target, options) {
     /*
      *
      */
-    var require = global.ngRequire = function(id, $scope, global) { 
-        if (typeof arguments[0] !== 'string') throw 'USAGE: require(formKey)';
+  //   var require = global.ngRequire = function(id, $scope, global) { 
+  //       if (typeof arguments[0] !== 'string') throw 'USAGE: require(formKey)';
          
-        var moduleContent = '';
+  //       var moduleContent = '';
         
-		if (require._cache[id]) {
-			return require._cache[id];
-        }
+		// if (require._cache[id]) {
+		// 	return require._cache[id];
+  //       }
       
-		$.get({ "url": "/includes/" + id + "/js/" + id + ".js", "dataType": "text" }, function(moduleContent) {          	
-         	try {
-           		var f = new Function('require', 'module', '$scope', moduleContent);
+		// $.get({ "url": "/includes/" + id + "/js/" + id + ".js", "dataType": "text" }, function(moduleContent) {          	
+  //        	try {
+  //          		var f = new Function('require', 'module', '$scope', moduleContent);
  
-            	require._root.unshift(id);
-            	var exports = f.call(global || {}, require, { "id": id }, $scope);
-            	require._root.shift();
+  //           	require._root.unshift(id);
+  //           	var exports = f.call(global || {}, require, { "id": id }, $scope);
+  //           	require._root.shift();
               
-			} catch(e) {
-				throw 'Unable to require source code from "' + id + '": ' + e;
+		// 	} catch(e) {
+		// 		throw 'Unable to require source code from "' + id + '": ' + e;
             
-          	}
+  //         	}
 			
-            require._cache[id] = exports;
+  //           require._cache[id] = exports;
           
-          	if (typeof(cb) == "function") cb(exports);
-        });      
-    }
+  //         	if (typeof(cb) == "function") cb(exports);
+  //       });      
+  //   }
     
-    require._root = [''];
-  	require._cache = {};  
+  //   require._root = [''];
+  // 	require._cache = {};  
   
   	var prepare = global.ngPrepare = function() {
       	document.body.setAttribute("data-ng-app", "dynaform");
