@@ -841,42 +841,41 @@ dynaform.filter = function($target, options) {
 
 		});
 		
-		debugger;
 		
 		return jd;
 	}
 	
-	$.fn.dynaform.defaults = {
+	// $.fn.dynaform.defaults = {
 
-		optionsValidate: {
-	     	ignore         : '',
-			invalidHandler : function(e, validator){
-	           if(validator.errorList.length)  
-	              $('#tabs a[href="#' + $(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+	// 	optionsValidate: {
+	//      	ignore         : '',
+	// 		invalidHandler : function(e, validator){
+	//            if(validator.errorList.length)  
+	//               $('#tabs a[href="#' + $(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
 	           
-	        },
+	//         },
 
-	        errorPlacement: function (error, element) {
+	//         errorPlacement: function (error, element) {
 	        	
-	        	var notification = $(element).attr("data-notification-target");
+	//         	var notification = $(element).attr("data-notification-target");
 
-	        	if(notification){
-	        		error.appendTo(notification);
-	        	} else {
-	        		$(element).after(error);
-	        	}
-	        }
+	//         	if(notification){
+	//         		error.appendTo(notification);
+	//         	} else {
+	//         		$(element).after(error);
+	//         	}
+	//         }
 
-		},
-		callbackSave: function(e) { 
+	// 	},
+	// 	callbackSave: function(e) { 
 			
-		},
-		callbackDelete: function(e) { 
+	// 	},
+	// 	callbackDelete: function(e) { 
 			
-		},
-		htmlConfirm: '<div class="dynaform-modal modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button><button type="button" class="btn btn-primary">Confirmar</button></div></div></div></div>',
-		htmlAlert:   '<div class="dynaform-modal modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer" style="text-align: center;"><button type="button" class="btn btn-primary">Ok</button></div></div></div></div>'
-	};
+	// 	},
+	// 	htmlConfirm: '<div class="dynaform-modal modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button><button type="button" class="btn btn-primary">Confirmar</button></div></div></div></div>',
+	// 	htmlAlert:   '<div class="dynaform-modal modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer" style="text-align: center;"><button type="button" class="btn btn-primary">Ok</button></div></div></div></div>'
+	// };
 
 })(jQuery);
 
