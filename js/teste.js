@@ -153,12 +153,12 @@
 	
 	/*
 	 * Push function to the engine cleanup
-	 */
-	window.dynaform.onunload = function(cb) {
-		if(typeof cb == "function") { 
-			scope.cleanup.push(cb);
-		}
-	}
+	//  */
+	// window.dynaform.onunload = function(cb) {
+	// 	if(typeof cb == "function") { 
+	// 		scope.cleanup.push(cb);
+	// 	}
+	// }
 	
 	window.dynaform.save = function(form, opts) {
 		var scope = $(form);
