@@ -529,295 +529,295 @@ dynaform.filter = function($target, options) {
  * Dynaform jQuery Plugin
  * @author jvarandas
  */
-(function($, engine) {
+// (function($, engine) {
 	
-	$.fn.dynaform = function(options) {
-		var opts = $.extend({}, $.fn.dynaform.defaults, options);
+// 	$.fn.dynaform = function(options) {
+// 		var opts = $.extend({}, $.fn.dynaform.defaults, options);
 		
-		if ($.fn.validate) this.validate(opts.optionsValidate);
+// 		if ($.fn.validate) this.validate(opts.optionsValidate);
 		
-		window.dynaform.setPermissions(this);
+// 		window.dynaform.setPermissions(this);
 
-		this.data("js-postdata", {});
+// 		this.data("js-postdata", {});
 
-		this.on("click", "input[type=checkbox]", function(e) {
-			var hval = this.checked ? this.value : $(this).attr("false-value");
+// 		this.on("click", "input[type=checkbox]", function(e) {
+// 			var hval = this.checked ? this.value : $(this).attr("false-value");
 			
-			$(this).siblings("input[role=checkbox-hdn]").val(hval)
-		});
+// 			$(this).siblings("input[role=checkbox-hdn]").val(hval)
+// 		});
 
-		this.on("click", "button[role=edit]", function(e) {
-			var $this = $(this);
+// 		this.on("click", "button[role=edit]", function(e) {
+// 			var $this = $(this);
 			
-			var rowid = $this.closest("tr[row-id]").attr("row-id");
+// 			var rowid = $this.closest("tr[row-id]").attr("row-id");
 			
-			var formtarget = $this.attr("form-target");
+// 			var formtarget = $this.attr("form-target");
 			
-			if (formtarget == null) {
-				formtarget = e.delegateTarget.getAttribute("form-key").replace(".list", ".edit");
-			}
+// 			if (formtarget == null) {
+// 				formtarget = e.delegateTarget.getAttribute("form-key").replace(".list", ".edit");
+// 			}
 			
-			var formtoggle = $this.attr("form-toggle");
+// 			var formtoggle = $this.attr("form-toggle");
 			
-			if (formtoggle == "modal") {
-				window.dynaform.modal(formtarget, rowid);
+// 			if (formtoggle == "modal") {
+// 				window.dynaform.modal(formtarget, rowid);
 				
-			// } else if (formtoggle == "static-top" && window.top.inPaaS) {
-				// window.top.inPaaS.menu.open(formtarget, rowid);
+// 			// } else if (formtoggle == "static-top" && window.top.inPaaS) {
+// 				// window.top.inPaaS.menu.open(formtarget, rowid);
 				
-			} else {
-				window.dynaform.load(formtarget, rowid);
+// 			} else {
+// 				window.dynaform.load(formtarget, rowid);
 				
-			}
+// 			}
 			
 			
-		});
+// 		});
 
-		this.on("click", "button[role=new]", function(e) {
-			var $this = $(this);
+// 		this.on("click", "button[role=new]", function(e) {
+// 			var $this = $(this);
 			
-			var formtarget = $this.attr("form-target");
-			if (formtarget == null) {
-				formtarget = e.delegateTarget.getAttribute("form-key").replace(".list", ".edit");
-			}
+// 			var formtarget = $this.attr("form-target");
+// 			if (formtarget == null) {
+// 				formtarget = e.delegateTarget.getAttribute("form-key").replace(".list", ".edit");
+// 			}
 			
-			window.dynaform.load(formtarget, "");
-		});
+// 			window.dynaform.load(formtarget, "");
+// 		});
 		
-		this.on("click", "button[role=table-new]", function(e) {
-			var target = $(this).attr("data-target");
+// 		this.on("click", "button[role=table-new]", function(e) {
+// 			var target = $(this).attr("data-target");
 			
-			var $tr = $("<tr></tr>");
-			var html = $(target).find("thead tr").html().replace(/<th\s/g, "<td ").replace(/<\/th/g, "</td");
+// 			var $tr = $("<tr></tr>");
+// 			var html = $(target).find("thead tr").html().replace(/<th\s/g, "<td ").replace(/<\/th/g, "</td");
 			
-			$tr.append(html);
-			$tr.find("td").contents().filter(function(){
-			    return (this.nodeType == 3);
-			}).remove();
+// 			$tr.append(html);
+// 			$tr.find("td").contents().filter(function(){
+// 			    return (this.nodeType == 3);
+// 			}).remove();
 			
-			$tr.find("input").removeAttr("disabled");
+// 			$tr.find("input").removeAttr("disabled");
 			
-			$(target).find("tbody").append($tr);
+// 			$(target).find("tbody").append($tr);
 			
-		});
+// 		});
 
-		this.on("click", "button[role=cancel]", function(e) {
-			e.preventDefault();
+// 		this.on("click", "button[role=cancel]", function(e) {
+// 			e.preventDefault();
 			
-			if ($(e.delegateTarget).is(".modal *")) {
-				$(this).loading();
-				$(e.delegateTarget).closest(".modal").modal("hide");
+// 			if ($(e.delegateTarget).is(".modal *")) {
+// 				$(this).loading();
+// 				$(e.delegateTarget).closest(".modal").modal("hide");
 				
-			} else {
-				var formTarget = $(this).attr("form-target");
-				if(formTarget) {
-					$(this).loading();
-					window.dynaform.load(formTarget, "");
-				}
+// 			} else {
+// 				var formTarget = $(this).attr("form-target");
+// 				if(formTarget) {
+// 					$(this).loading();
+// 					window.dynaform.load(formTarget, "");
+// 				}
 
-			}
+// 			}
 			
-			return false;
-		});
+// 			return false;
+// 		});
 		
-		this.on("click", "button[role=navigate]", function(e) {
-			e.preventDefault();
+// 		this.on("click", "button[role=navigate]", function(e) {
+// 			e.preventDefault();
 			
-			var formTarget = $(this).attr("form-target");
-			if(formTarget) {
-				$(this).loading();
-				window.dynaform.load(formTarget, "");
-			}
+// 			var formTarget = $(this).attr("form-target");
+// 			if(formTarget) {
+// 				$(this).loading();
+// 				window.dynaform.load(formTarget, "");
+// 			}
 			
-			return false;
-		});
+// 			return false;
+// 		});
 		
-		this.on("click", "button[role=save]", function(e) {
-			$(this).loading();
-			return window.dynaform.save(e.delegateTarget, {
-				element : $(this)
-			});
-		});
+// 		this.on("click", "button[role=save]", function(e) {
+// 			$(this).loading();
+// 			return window.dynaform.save(e.delegateTarget, {
+// 				element : $(this)
+// 			});
+// 		});
 		
-		this.on("change", "input,textarea,select", function(e) {
+// 		this.on("change", "input,textarea,select", function(e) {
 		
-			var o = $(e.delegateTarget).data("js-postdata");
-			o[this.name] = this.value;
+// 			var o = $(e.delegateTarget).data("js-postdata");
+// 			o[this.name] = this.value;
 			
-			$(e.delegateTarget).data("js-postdata", o);			
-		});
+// 			$(e.delegateTarget).data("js-postdata", o);			
+// 		});
 		
-		this.on("aftersave", function(e, args) {
-			if (args.data.error==null) {
-				if ($(e.delegateTarget).is(".modal *")) {
-					$(e.delegateTarget).closest(".modal").modal("hide");
-				} else {
-					if(args.element) {
-						var formTarget = args.element.attr("form-target");
-						if(formTarget) {
-							/*
-							 * Save & Navigate 
-							 */
-							window.dynaform.load(formTarget, "");
-						} else {
-							/*
-							 * Save & Stay
-							 */
-							var $recordId = $(e.delegateTarget).find("input[record-id]");
-							if($recordId && !$recordId.val()) {
-								var generatedId = args.data["record-id"];
-								$recordId.val(generatedId);
+// 		this.on("aftersave", function(e, args) {
+// 			if (args.data.error==null) {
+// 				if ($(e.delegateTarget).is(".modal *")) {
+// 					$(e.delegateTarget).closest(".modal").modal("hide");
+// 				} else {
+// 					if(args.element) {
+// 						var formTarget = args.element.attr("form-target");
+// 						if(formTarget) {
+// 							/*
+// 							 * Save & Navigate 
+// 							 */
+// 							window.dynaform.load(formTarget, "");
+// 						} else {
+// 							/*
+// 							 * Save & Stay
+// 							 */
+// 							var $recordId = $(e.delegateTarget).find("input[record-id]");
+// 							if($recordId && !$recordId.val()) {
+// 								var generatedId = args.data["record-id"];
+// 								$recordId.val(generatedId);
 								
-								// Update form action with row-id
-								var formAction = $(e.delegateTarget).attr("action");
-								$(e.delegateTarget).attr("action", formAction + generatedId);
+// 								// Update form action with row-id
+// 								var formAction = $(e.delegateTarget).attr("action");
+// 								$(e.delegateTarget).attr("action", formAction + generatedId);
 								
-								// Push record-id to window history
-								window.history.pushState({ savestay:true }, window.document.title, location.href + generatedId);
-							}
+// 								// Push record-id to window history
+// 								window.history.pushState({ savestay:true }, window.document.title, location.href + generatedId);
+// 							}
 							
-							args.element.loading("done");
-						}
-					}
-				}
-			} else {
-				if(args.element) {
-					args.element.loading("done");
-				}
-			}
-		});
+// 							args.element.loading("done");
+// 						}
+// 					}
+// 				}
+// 			} else {
+// 				if(args.element) {
+// 					args.element.loading("done");
+// 				}
+// 			}
+// 		});
 		
-		this.on("click", "button[role=duplicate]", function(e) {
-			return window.dynaform.duplicate(e.delegateTarget);
-		});
+// 		this.on("click", "button[role=duplicate]", function(e) {
+// 			return window.dynaform.duplicate(e.delegateTarget);
+// 		});
 
-		this.on("click", "button[role=remove]", function(e) {
-			var $target = $(e.delegateTarget);
+// 		this.on("click", "button[role=remove]", function(e) {
+// 			var $target = $(e.delegateTarget);
 			
-			/*
-			 * Check operation permission for current execution
-			 * TODO: Find a way to put it on 'dynaform.remove'. The problem is that it could break some code.
-			 */
-			if(!$target.is("[data-permission-delete]")) return false;
+// 			/*
+// 			 * Check operation permission for current execution
+// 			 * TODO: Find a way to put it on 'dynaform.remove'. The problem is that it could break some code.
+// 			 */
+// 			if(!$target.is("[data-permission-delete]")) return false;
 			
-			var rowid = $target.find("[record-id]").val();
-			var fkey = $target.attr("form-key");
+// 			var rowid = $target.find("[record-id]").val();
+// 			var fkey = $target.attr("form-key");
 
-			if( $(this).is("tr[row-id] button") ) {
-				rowid = $(this).closest("tr[row-id]").attr("row-id");
-			}
+// 			if( $(this).is("tr[row-id] button") ) {
+// 				rowid = $(this).closest("tr[row-id]").attr("row-id");
+// 			}
 			
-			var $btn = $(this);
+// 			var $btn = $(this);
 			
-			var title = this.title || this.getAttribute("data-original-title") || document.title
+// 			var title = this.title || this.getAttribute("data-original-title") || document.title
 			
-			dynaform.confirm( title, "Deseja remover o registro?", function() {
-				$btn.loading();
-				dynaform.remove(fkey, rowid, function(data, textStatus, jqXHR) {
-					$target.trigger("afterremove", {
-						data    : data,
-						element : $btn
-					});
-				});
-			})
-		});
+// 			dynaform.confirm( title, "Deseja remover o registro?", function() {
+// 				$btn.loading();
+// 				dynaform.remove(fkey, rowid, function(data, textStatus, jqXHR) {
+// 					$target.trigger("afterremove", {
+// 						data    : data,
+// 						element : $btn
+// 					});
+// 				});
+// 			})
+// 		});
 		
-		this.on("afterremove", function(e, args) {
-			if (args.data.error==null) {
-				if ($(e.delegateTarget).is(".modal *")) {
-					$(e.delegateTarget).closest(".modal").modal("hide");
-				} else {
-					if(args.element) {
-						var formTarget = args.element.attr("form-target");
-						if(formTarget) {
-							window.dynaform.load(formTarget, "");
-						} else {
-							if ($.fn.DataTable) {
-								var $row = $(args.element).closest("tr");
+// 		this.on("afterremove", function(e, args) {
+// 			if (args.data.error==null) {
+// 				if ($(e.delegateTarget).is(".modal *")) {
+// 					$(e.delegateTarget).closest(".modal").modal("hide");
+// 				} else {
+// 					if(args.element) {
+// 						var formTarget = args.element.attr("form-target");
+// 						if(formTarget) {
+// 							window.dynaform.load(formTarget, "");
+// 						} else {
+// 							if ($.fn.DataTable) {
+// 								var $row = $(args.element).closest("tr");
 								
-								var dt = $(args.element).closest("table").DataTable();
-								dt.row( $(args.element).closest("tr") ).remove().draw();
+// 								var dt = $(args.element).closest("table").DataTable();
+// 								dt.row( $(args.element).closest("tr") ).remove().draw();
 								
-							} else {
-								if(args.element.parents("tr[row-id]").length > 0)
-									args.element.tooltip("destroy").closest("tr").remove();
-								else
-									args.element.loading("done");
-							}
-						}
-					}
-				}
-			} else {
-				if(args.element) {
-					args.element.loading("done");
-				}
-			}
-		});
+// 							} else {
+// 								if(args.element.parents("tr[row-id]").length > 0)
+// 									args.element.tooltip("destroy").closest("tr").remove();
+// 								else
+// 									args.element.loading("done");
+// 							}
+// 						}
+// 					}
+// 				}
+// 			} else {
+// 				if(args.element) {
+// 					args.element.loading("done");
+// 				}
+// 			}
+// 		});
 		
-		this.on("click", "button[role=dom-remove]", function(e) {
-			var $el = $(this).tooltip("destroy").closest("tr")
+// 		this.on("click", "button[role=dom-remove]", function(e) {
+// 			var $el = $(this).tooltip("destroy").closest("tr")
 			
-			dynaform.confirm(document.title, "Deseja remover o registro?", function() {
-				$el.remove();
-			})
+// 			dynaform.confirm(document.title, "Deseja remover o registro?", function() {
+// 				$el.remove();
+// 			})
 			
-		});
+// 		});
 		
-		this.on("click", "[role=filter][data-target]", function(e) {
-			var $this = $(this);
-			$this.loading();
+// 		this.on("click", "[role=filter][data-target]", function(e) {
+// 			var $this = $(this);
+// 			$this.loading();
 			
-			var dataTarget = $(e.currentTarget).attr('data-target');
-			dynaform.filter($('#' + dataTarget), {
-				oncomplete: function() {
-					$this.loading("done");
-				}
-			});
+// 			var dataTarget = $(e.currentTarget).attr('data-target');
+// 			dynaform.filter($('#' + dataTarget), {
+// 				oncomplete: function() {
+// 					$this.loading("done");
+// 				}
+// 			});
 			
-			/* ga-code (dynaform-filter) */
-			var fkey = e.delegateTarget.getAttribute("form-key");
+// 			/* ga-code (dynaform-filter) */
+// 			var fkey = e.delegateTarget.getAttribute("form-key");
 			
-			ga('send', 'event', 'dynaform', 'filter', { "form": fkey });
+// 			ga('send', 'event', 'dynaform', 'filter', { "form": fkey });
 
-		});
+// 		});
 		
-		this.on("keyup", "[role=filter-field][data-target]", function(e) {
-			if (e.which==13) {
-				var dataTarget = $(e.currentTarget).attr('data-target');
-				dynaform.filter($('#' + dataTarget));
+// 		this.on("keyup", "[role=filter-field][data-target]", function(e) {
+// 			if (e.which==13) {
+// 				var dataTarget = $(e.currentTarget).attr('data-target');
+// 				dynaform.filter($('#' + dataTarget));
 				
-				/* ga-code (dynaform-filter) */
-				var fkey = e.delegateTarget.getAttribute("form-key");
+// 				/* ga-code (dynaform-filter) */
+// 				var fkey = e.delegateTarget.getAttribute("form-key");
 				
-				ga('send', 'event', 'dynaform', 'filter', { "form": fkey });
-			}
-		});
+// 				ga('send', 'event', 'dynaform', 'filter', { "form": fkey });
+// 			}
+// 		});
 		
-		var $dependform = this;
-		this.find("[depends]").each(function(index, el) {
-			var depends = el.getAttribute("depends").split(",");
-			var dependantId = el.getAttribute("form-field-id");
+// 		var $dependform = this;
+// 		this.find("[depends]").each(function(index, el) {
+// 			var depends = el.getAttribute("depends").split(",");
+// 			var dependantId = el.getAttribute("form-field-id");
 			
-			for (var k in depends) {
-				$dependform.on("change", "[form-field-id=" + depends[k] + "]", function(e) {
-					var $source = $(this);
-					var $target = $("[form-field-id=" + dependantId + "]");
+// 			for (var k in depends) {
+// 				$dependform.on("change", "[form-field-id=" + depends[k] + "]", function(e) {
+// 					var $source = $(this);
+// 					var $target = $("[form-field-id=" + dependantId + "]");
 					
-					$source.trigger("beforedepends", [ $target ]);
+// 					$source.trigger("beforedepends", [ $target ]);
 					
-					//console.log($target);
-					dynaform.filter($target);
-				});
-			}
-		});
+// 					//console.log($target);
+// 					dynaform.filter($target);
+// 				});
+// 			}
+// 		});
 		
-		this.on("keydown", "input:not(.bootstrap-tagsinput input)", function(e) {
-			if (e.which==13) return false;
-		})
+// 		this.on("keydown", "input:not(.bootstrap-tagsinput input)", function(e) {
+// 			if (e.which==13) return false;
+// 		})
 		
-		this.find("[form-field-id]").trigger("load");
+// 		this.find("[form-field-id]").trigger("load");
 		
-	}
+// 	}
 	
 	// $.fn.save = function() {
 		
