@@ -969,8 +969,8 @@ function debounce(func, wait, immediate) {
 			if (global.dynaform !== undefined && $form.length > 0) 
 				global.dynaform.init($form); 
 				
-			// if (window.top && window.top.inPaaS) 					
-				// window.top.inPaaS.iframeload( $form.attr("form-key"), $form.find("[record-id]").val() );
+			if (window.top && window.top.inPaaS) 					
+				window.top.inPaaS.iframeload( $form.attr("form-key"), $form.find("[record-id]").val() );
 		} catch(e) {
 			
 		}
