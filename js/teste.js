@@ -143,13 +143,13 @@
 	/*
 	 * Push functions to the engine load
 	 */
-	window.dynaform.onload = function(cb) {
-		if(typeof cb == "function") { 
-			window.dynaform.initial.push(cb);
-		} else {
-			console.error(".onload( callback )\nMissing parameter or wrong parameter type \'callback\' should be a function.\nSupplied parameter is %s", typeof cb);
-		}
-	};
+	// window.dynaform.onload = function(cb) {
+	// 	if(typeof cb == "function") { 
+	// 		window.dynaform.initial.push(cb);
+	// 	} else {
+	// 		console.error(".onload( callback )\nMissing parameter or wrong parameter type \'callback\' should be a function.\nSupplied parameter is %s", typeof cb);
+	// 	}
+	// };
 	
 	/*
 	 * Push function to the engine cleanup
