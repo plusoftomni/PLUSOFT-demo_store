@@ -49,50 +49,50 @@
 	 * Load a Form using ajax, send the content to the callback and load the initial script.
 	 * window.dynaform.load(formkey, recordid, callback)
 	 */
-	// window.dynaform.load = function(formkey, recordid, params, callback) {
-	// 	if (typeof(params) == "function") {
-	// 		callback = params;
-	// 		params = null;
-	// 	}
+	window.dynaform.load = function(formkey, recordid, params, callback) {
+		if (typeof(params) == "function") {
+			callback = params;
+			params = null;
+		}
 		
-	// 	if (arguments.length == 1) {
-	// 		var furl = formkey;
+		if (arguments.length == 1) {
+			var furl = formkey;
 			
-	// 		/* ga-code (dynaform-load) */
-	// 		ga('send', 'event', 'dynaform', 'load', { "url": furl });
+			/* ga-code (dynaform-load) */
+			ga('send', 'event', 'dynaform', 'load', { "url": furl });
 
-	// 		window.location.href = furl;
+			window.location.href = furl;
 			
-	// 	} else if (callback == null) {
-	// 		if (recordid == undefined) recordid = "";
+		} else if (callback == null) {
+			if (recordid == undefined) recordid = "";
 			
-	// 		/* ga-code (dynaform-load) */
-	// 		ga('send', 'event', 'dynaform', 'load', { "form": formkey, "record-id": recordid });
+			/* ga-code (dynaform-load) */
+			ga('send', 'event', 'dynaform', 'load', { "form": formkey, "record-id": recordid });
 
-	// 		var furl = "/forms/" + formkey + "/" + recordid;
-	// 		if (params != null) furl += "?" + $.param(params);
+			var furl = "/forms/" + formkey + "/" + recordid;
+			if (params != null) furl += "?" + $.param(params);
 
-	// 		window.location.href = furl;
+			window.location.href = furl;
 
 			
-	// 	} else if (callback != null) {
-	// 		if (recordid == undefined) recordid = "";
+		} else if (callback != null) {
+			if (recordid == undefined) recordid = "";
 
-	// 		/* ga-code (dynaform-load) */
-	// 		ga('send', 'event', 'dynaform', 'load', { "form": formkey, "record-id": recordid });
+			/* ga-code (dynaform-load) */
+			ga('send', 'event', 'dynaform', 'load', { "form": formkey, "record-id": recordid });
 			
-	// 		var furl = "/forms/" + formkey + "/" + recordid;
-	// 		dynaform.ajax({ url: furl, type: "GET", cache: false, dataType: "html" }, function(data, textStatus, jqXHR) {
-	// 			var $page = $(data);
+			var furl = "/forms/" + formkey + "/" + recordid;
+			dynaform.ajax({ url: furl, type: "GET", cache: false, dataType: "html" }, function(data, textStatus, jqXHR) {
+				var $page = $(data);
 				
-	//           	// Load the form content (callback could return the form scope, to run the script)
-	// 			callback($page[0]);
+	          	// Load the form content (callback could return the form scope, to run the script)
+				callback($page[0]);
 				
-	// 		});
+			});
 			
-	// 	}
+		}
 		
-	// };
+	};
 	
 	window.dynaform.modal = function(formkey, recordid, options) {
 		var opts = $.extend({
@@ -143,22 +143,22 @@
 	/*
 	 * Push functions to the engine load
 	 */
-	// window.dynaform.onload = function(cb) {
-	// 	if(typeof cb == "function") { 
-	// 		window.dynaform.initial.push(cb);
-	// 	} else {
-	// 		console.error(".onload( callback )\nMissing parameter or wrong parameter type \'callback\' should be a function.\nSupplied parameter is %s", typeof cb);
-	// 	}
-	// };
+	window.dynaform.onload = function(cb) {
+		if(typeof cb == "function") { 
+			window.dynaform.initial.push(cb);
+		} else {
+			console.error(".onload( callback )\nMissing parameter or wrong parameter type \'callback\' should be a function.\nSupplied parameter is %s", typeof cb);
+		}
+	};
 	
 	/*
 	 * Push function to the engine cleanup
-	//  */
-	// window.dynaform.onunload = function(cb) {
-	// 	if(typeof cb == "function") { 
-	// 		scope.cleanup.push(cb);
-	// 	}
-	// }
+	 */
+	window.dynaform.onunload = function(cb) {
+		if(typeof cb == "function") { 
+			scope.cleanup.push(cb);
+		}
+	}
 	
 	window.dynaform.save = function(form, opts) {
 		var scope = $(form);
@@ -391,19 +391,19 @@
  * Default functionality for the notification worker
  */
 dynaform.onload(function(scope) {
-	// if ( window.top.inPaaS != undefined) {
-	// 	$(window).blur(function(){
-	// 		if (window.top.inPaaS.notification==undefined) return;
+	if ( window.top.inPaaS != undefined) {
+		$(window).blur(function(){
+			if (window.top.inPaaS.notification==undefined) return;
 			
-	// 		window.top.inPaaS.notification.worker.pause();
-	// 	});
+			window.top.inPaaS.notification.worker.pause();
+		});
 		
-	// 	$(window).focus(function(){
-	// 		if (window.top.inPaaS.notification==undefined) return;
+		$(window).focus(function(){
+			if (window.top.inPaaS.notification==undefined) return;
 			
-	// 		window.top.inPaaS.notification.worker.unpause();
-	// 	});
-	// }
+			window.top.inPaaS.notification.worker.unpause();
+		});
+	}
 
 	var msg = $("div[role=messages-feed] span[role=error-message]").text();
 	if(msg && msg!="") {
@@ -529,376 +529,377 @@ dynaform.filter = function($target, options) {
  * Dynaform jQuery Plugin
  * @author jvarandas
  */
-// (function($, engine) {
+(function($, engine) {
 	
-// 	$.fn.dynaform = function(options) {
-// 		var opts = $.extend({}, $.fn.dynaform.defaults, options);
+	$.fn.dynaform = function(options) {
+		var opts = $.extend({}, $.fn.dynaform.defaults, options);
 		
-// 		if ($.fn.validate) this.validate(opts.optionsValidate);
+		if ($.fn.validate) this.validate(opts.optionsValidate);
 		
-// 		window.dynaform.setPermissions(this);
+		window.dynaform.setPermissions(this);
 
-// 		this.data("js-postdata", {});
+		this.data("js-postdata", {});
 
-// 		this.on("click", "input[type=checkbox]", function(e) {
-// 			var hval = this.checked ? this.value : $(this).attr("false-value");
+		this.on("click", "input[type=checkbox]", function(e) {
+			var hval = this.checked ? this.value : $(this).attr("false-value");
 			
-// 			$(this).siblings("input[role=checkbox-hdn]").val(hval)
-// 		});
+			$(this).siblings("input[role=checkbox-hdn]").val(hval)
+		});
 
-// 		this.on("click", "button[role=edit]", function(e) {
-// 			var $this = $(this);
+		this.on("click", "button[role=edit]", function(e) {
+			var $this = $(this);
 			
-// 			var rowid = $this.closest("tr[row-id]").attr("row-id");
+			var rowid = $this.closest("tr[row-id]").attr("row-id");
 			
-// 			var formtarget = $this.attr("form-target");
+			var formtarget = $this.attr("form-target");
 			
-// 			if (formtarget == null) {
-// 				formtarget = e.delegateTarget.getAttribute("form-key").replace(".list", ".edit");
-// 			}
+			if (formtarget == null) {
+				formtarget = e.delegateTarget.getAttribute("form-key").replace(".list", ".edit");
+			}
 			
-// 			var formtoggle = $this.attr("form-toggle");
+			var formtoggle = $this.attr("form-toggle");
 			
-// 			if (formtoggle == "modal") {
-// 				window.dynaform.modal(formtarget, rowid);
+			if (formtoggle == "modal") {
+				window.dynaform.modal(formtarget, rowid);
 				
-// 			// } else if (formtoggle == "static-top" && window.top.inPaaS) {
-// 				// window.top.inPaaS.menu.open(formtarget, rowid);
+			} else if (formtoggle == "static-top" && window.top.inPaaS) {
+				window.top.inPaaS.menu.open(formtarget, rowid);
 				
-// 			} else {
-// 				window.dynaform.load(formtarget, rowid);
+			} else {
+				window.dynaform.load(formtarget, rowid);
 				
-// 			}
+			}
 			
 			
-// 		});
+		});
 
-// 		this.on("click", "button[role=new]", function(e) {
-// 			var $this = $(this);
+		this.on("click", "button[role=new]", function(e) {
+			var $this = $(this);
 			
-// 			var formtarget = $this.attr("form-target");
-// 			if (formtarget == null) {
-// 				formtarget = e.delegateTarget.getAttribute("form-key").replace(".list", ".edit");
-// 			}
+			var formtarget = $this.attr("form-target");
+			if (formtarget == null) {
+				formtarget = e.delegateTarget.getAttribute("form-key").replace(".list", ".edit");
+			}
 			
-// 			window.dynaform.load(formtarget, "");
-// 		});
+			window.dynaform.load(formtarget, "");
+		});
 		
-// 		this.on("click", "button[role=table-new]", function(e) {
-// 			var target = $(this).attr("data-target");
+		this.on("click", "button[role=table-new]", function(e) {
+			var target = $(this).attr("data-target");
 			
-// 			var $tr = $("<tr></tr>");
-// 			var html = $(target).find("thead tr").html().replace(/<th\s/g, "<td ").replace(/<\/th/g, "</td");
+			var $tr = $("<tr></tr>");
+			var html = $(target).find("thead tr").html().replace(/<th\s/g, "<td ").replace(/<\/th/g, "</td");
 			
-// 			$tr.append(html);
-// 			$tr.find("td").contents().filter(function(){
-// 			    return (this.nodeType == 3);
-// 			}).remove();
+			$tr.append(html);
+			$tr.find("td").contents().filter(function(){
+			    return (this.nodeType == 3);
+			}).remove();
 			
-// 			$tr.find("input").removeAttr("disabled");
+			$tr.find("input").removeAttr("disabled");
 			
-// 			$(target).find("tbody").append($tr);
+			$(target).find("tbody").append($tr);
 			
-// 		});
+		});
 
-// 		this.on("click", "button[role=cancel]", function(e) {
-// 			e.preventDefault();
+		this.on("click", "button[role=cancel]", function(e) {
+			e.preventDefault();
 			
-// 			if ($(e.delegateTarget).is(".modal *")) {
-// 				$(this).loading();
-// 				$(e.delegateTarget).closest(".modal").modal("hide");
+			if ($(e.delegateTarget).is(".modal *")) {
+				$(this).loading();
+				$(e.delegateTarget).closest(".modal").modal("hide");
 				
-// 			} else {
-// 				var formTarget = $(this).attr("form-target");
-// 				if(formTarget) {
-// 					$(this).loading();
-// 					window.dynaform.load(formTarget, "");
-// 				}
+			} else {
+				var formTarget = $(this).attr("form-target");
+				if(formTarget) {
+					$(this).loading();
+					window.dynaform.load(formTarget, "");
+				}
 
-// 			}
+			}
 			
-// 			return false;
-// 		});
+			return false;
+		});
 		
-// 		this.on("click", "button[role=navigate]", function(e) {
-// 			e.preventDefault();
+		this.on("click", "button[role=navigate]", function(e) {
+			e.preventDefault();
 			
-// 			var formTarget = $(this).attr("form-target");
-// 			if(formTarget) {
-// 				$(this).loading();
-// 				window.dynaform.load(formTarget, "");
-// 			}
+			var formTarget = $(this).attr("form-target");
+			if(formTarget) {
+				$(this).loading();
+				window.dynaform.load(formTarget, "");
+			}
 			
-// 			return false;
-// 		});
+			return false;
+		});
 		
-// 		this.on("click", "button[role=save]", function(e) {
-// 			$(this).loading();
-// 			return window.dynaform.save(e.delegateTarget, {
-// 				element : $(this)
-// 			});
-// 		});
+		this.on("click", "button[role=save]", function(e) {
+			$(this).loading();
+			return window.dynaform.save(e.delegateTarget, {
+				element : $(this)
+			});
+		});
 		
-// 		this.on("change", "input,textarea,select", function(e) {
+		this.on("change", "input,textarea,select", function(e) {
 		
-// 			var o = $(e.delegateTarget).data("js-postdata");
-// 			o[this.name] = this.value;
+			var o = $(e.delegateTarget).data("js-postdata");
+			o[this.name] = this.value;
 			
-// 			$(e.delegateTarget).data("js-postdata", o);			
-// 		});
+			$(e.delegateTarget).data("js-postdata", o);			
+		});
 		
-// 		this.on("aftersave", function(e, args) {
-// 			if (args.data.error==null) {
-// 				if ($(e.delegateTarget).is(".modal *")) {
-// 					$(e.delegateTarget).closest(".modal").modal("hide");
-// 				} else {
-// 					if(args.element) {
-// 						var formTarget = args.element.attr("form-target");
-// 						if(formTarget) {
-// 							/*
-// 							 * Save & Navigate 
-// 							 */
-// 							window.dynaform.load(formTarget, "");
-// 						} else {
-// 							/*
-// 							 * Save & Stay
-// 							 */
-// 							var $recordId = $(e.delegateTarget).find("input[record-id]");
-// 							if($recordId && !$recordId.val()) {
-// 								var generatedId = args.data["record-id"];
-// 								$recordId.val(generatedId);
+		this.on("aftersave", function(e, args) {
+			if (args.data.error==null) {
+				if ($(e.delegateTarget).is(".modal *")) {
+					$(e.delegateTarget).closest(".modal").modal("hide");
+				} else {
+					if(args.element) {
+						var formTarget = args.element.attr("form-target");
+						if(formTarget) {
+							/*
+							 * Save & Navigate 
+							 */
+							window.dynaform.load(formTarget, "");
+						} else {
+							/*
+							 * Save & Stay
+							 */
+							var $recordId = $(e.delegateTarget).find("input[record-id]");
+							if($recordId && !$recordId.val()) {
+								var generatedId = args.data["record-id"];
+								$recordId.val(generatedId);
 								
-// 								// Update form action with row-id
-// 								var formAction = $(e.delegateTarget).attr("action");
-// 								$(e.delegateTarget).attr("action", formAction + generatedId);
+								// Update form action with row-id
+								var formAction = $(e.delegateTarget).attr("action");
+								$(e.delegateTarget).attr("action", formAction + generatedId);
 								
-// 								// Push record-id to window history
-// 								window.history.pushState({ savestay:true }, window.document.title, location.href + generatedId);
-// 							}
+								// Push record-id to window history
+								window.history.pushState({ savestay:true }, window.document.title, location.href + generatedId);
+							}
 							
-// 							args.element.loading("done");
-// 						}
-// 					}
-// 				}
-// 			} else {
-// 				if(args.element) {
-// 					args.element.loading("done");
-// 				}
-// 			}
-// 		});
+							args.element.loading("done");
+						}
+					}
+				}
+			} else {
+				if(args.element) {
+					args.element.loading("done");
+				}
+			}
+		});
 		
-// 		this.on("click", "button[role=duplicate]", function(e) {
-// 			return window.dynaform.duplicate(e.delegateTarget);
-// 		});
+		this.on("click", "button[role=duplicate]", function(e) {
+			return window.dynaform.duplicate(e.delegateTarget);
+		});
 
-// 		this.on("click", "button[role=remove]", function(e) {
-// 			var $target = $(e.delegateTarget);
+		this.on("click", "button[role=remove]", function(e) {
+			var $target = $(e.delegateTarget);
 			
-// 			/*
-// 			 * Check operation permission for current execution
-// 			 * TODO: Find a way to put it on 'dynaform.remove'. The problem is that it could break some code.
-// 			 */
-// 			if(!$target.is("[data-permission-delete]")) return false;
+			/*
+			 * Check operation permission for current execution
+			 * TODO: Find a way to put it on 'dynaform.remove'. The problem is that it could break some code.
+			 */
+			if(!$target.is("[data-permission-delete]")) return false;
 			
-// 			var rowid = $target.find("[record-id]").val();
-// 			var fkey = $target.attr("form-key");
+			var rowid = $target.find("[record-id]").val();
+			var fkey = $target.attr("form-key");
 
-// 			if( $(this).is("tr[row-id] button") ) {
-// 				rowid = $(this).closest("tr[row-id]").attr("row-id");
-// 			}
+			if( $(this).is("tr[row-id] button") ) {
+				rowid = $(this).closest("tr[row-id]").attr("row-id");
+			}
 			
-// 			var $btn = $(this);
+			var $btn = $(this);
 			
-// 			var title = this.title || this.getAttribute("data-original-title") || document.title
+			var title = this.title || this.getAttribute("data-original-title") || document.title
 			
-// 			dynaform.confirm( title, "Deseja remover o registro?", function() {
-// 				$btn.loading();
-// 				dynaform.remove(fkey, rowid, function(data, textStatus, jqXHR) {
-// 					$target.trigger("afterremove", {
-// 						data    : data,
-// 						element : $btn
-// 					});
-// 				});
-// 			})
-// 		});
+			dynaform.confirm( title, "Deseja remover o registro?", function() {
+				$btn.loading();
+				dynaform.remove(fkey, rowid, function(data, textStatus, jqXHR) {
+					$target.trigger("afterremove", {
+						data    : data,
+						element : $btn
+					});
+				});
+			})
+		});
 		
-// 		this.on("afterremove", function(e, args) {
-// 			if (args.data.error==null) {
-// 				if ($(e.delegateTarget).is(".modal *")) {
-// 					$(e.delegateTarget).closest(".modal").modal("hide");
-// 				} else {
-// 					if(args.element) {
-// 						var formTarget = args.element.attr("form-target");
-// 						if(formTarget) {
-// 							window.dynaform.load(formTarget, "");
-// 						} else {
-// 							if ($.fn.DataTable) {
-// 								var $row = $(args.element).closest("tr");
+		this.on("afterremove", function(e, args) {
+			if (args.data.error==null) {
+				if ($(e.delegateTarget).is(".modal *")) {
+					$(e.delegateTarget).closest(".modal").modal("hide");
+				} else {
+					if(args.element) {
+						var formTarget = args.element.attr("form-target");
+						if(formTarget) {
+							window.dynaform.load(formTarget, "");
+						} else {
+							if ($.fn.DataTable) {
+								var $row = $(args.element).closest("tr");
 								
-// 								var dt = $(args.element).closest("table").DataTable();
-// 								dt.row( $(args.element).closest("tr") ).remove().draw();
+								var dt = $(args.element).closest("table").DataTable();
+								dt.row( $(args.element).closest("tr") ).remove().draw();
 								
-// 							} else {
-// 								if(args.element.parents("tr[row-id]").length > 0)
-// 									args.element.tooltip("destroy").closest("tr").remove();
-// 								else
-// 									args.element.loading("done");
-// 							}
-// 						}
-// 					}
-// 				}
-// 			} else {
-// 				if(args.element) {
-// 					args.element.loading("done");
-// 				}
-// 			}
-// 		});
+							} else {
+								if(args.element.parents("tr[row-id]").length > 0)
+									args.element.tooltip("destroy").closest("tr").remove();
+								else
+									args.element.loading("done");
+							}
+						}
+					}
+				}
+			} else {
+				if(args.element) {
+					args.element.loading("done");
+				}
+			}
+		});
 		
-// 		this.on("click", "button[role=dom-remove]", function(e) {
-// 			var $el = $(this).tooltip("destroy").closest("tr")
+		this.on("click", "button[role=dom-remove]", function(e) {
+			var $el = $(this).tooltip("destroy").closest("tr")
 			
-// 			dynaform.confirm(document.title, "Deseja remover o registro?", function() {
-// 				$el.remove();
-// 			})
+			dynaform.confirm(document.title, "Deseja remover o registro?", function() {
+				$el.remove();
+			})
 			
-// 		});
+		});
 		
-// 		this.on("click", "[role=filter][data-target]", function(e) {
-// 			var $this = $(this);
-// 			$this.loading();
+		this.on("click", "[role=filter][data-target]", function(e) {
+			var $this = $(this);
+			$this.loading();
 			
-// 			var dataTarget = $(e.currentTarget).attr('data-target');
-// 			dynaform.filter($('#' + dataTarget), {
-// 				oncomplete: function() {
-// 					$this.loading("done");
-// 				}
-// 			});
+			var dataTarget = $(e.currentTarget).attr('data-target');
+			dynaform.filter($('#' + dataTarget), {
+				oncomplete: function() {
+					$this.loading("done");
+				}
+			});
 			
-// 			/* ga-code (dynaform-filter) */
-// 			var fkey = e.delegateTarget.getAttribute("form-key");
+			/* ga-code (dynaform-filter) */
+			var fkey = e.delegateTarget.getAttribute("form-key");
 			
-// 			ga('send', 'event', 'dynaform', 'filter', { "form": fkey });
+			ga('send', 'event', 'dynaform', 'filter', { "form": fkey });
 
-// 		});
+		});
 		
-// 		this.on("keyup", "[role=filter-field][data-target]", function(e) {
-// 			if (e.which==13) {
-// 				var dataTarget = $(e.currentTarget).attr('data-target');
-// 				dynaform.filter($('#' + dataTarget));
+		this.on("keyup", "[role=filter-field][data-target]", function(e) {
+			if (e.which==13) {
+				var dataTarget = $(e.currentTarget).attr('data-target');
+				dynaform.filter($('#' + dataTarget));
 				
-// 				/* ga-code (dynaform-filter) */
-// 				var fkey = e.delegateTarget.getAttribute("form-key");
+				/* ga-code (dynaform-filter) */
+				var fkey = e.delegateTarget.getAttribute("form-key");
 				
-// 				ga('send', 'event', 'dynaform', 'filter', { "form": fkey });
-// 			}
-// 		});
+				ga('send', 'event', 'dynaform', 'filter', { "form": fkey });
+			}
+		});
 		
-// 		var $dependform = this;
-// 		this.find("[depends]").each(function(index, el) {
-// 			var depends = el.getAttribute("depends").split(",");
-// 			var dependantId = el.getAttribute("form-field-id");
+		var $dependform = this;
+		this.find("[depends]").each(function(index, el) {
+			var depends = el.getAttribute("depends").split(",");
+			var dependantId = el.getAttribute("form-field-id");
 			
-// 			for (var k in depends) {
-// 				$dependform.on("change", "[form-field-id=" + depends[k] + "]", function(e) {
-// 					var $source = $(this);
-// 					var $target = $("[form-field-id=" + dependantId + "]");
+			for (var k in depends) {
+				$dependform.on("change", "[form-field-id=" + depends[k] + "]", function(e) {
+					var $source = $(this);
+					var $target = $("[form-field-id=" + dependantId + "]");
 					
-// 					$source.trigger("beforedepends", [ $target ]);
+					$source.trigger("beforedepends", [ $target ]);
 					
-// 					//console.log($target);
-// 					dynaform.filter($target);
-// 				});
-// 			}
-// 		});
+					//console.log($target);
+					dynaform.filter($target);
+				});
+			}
+		});
 		
-// 		this.on("keydown", "input:not(.bootstrap-tagsinput input)", function(e) {
-// 			if (e.which==13) return false;
-// 		})
+		this.on("keydown", "input:not(.bootstrap-tagsinput input)", function(e) {
+			if (e.which==13) return false;
+		})
 		
-// 		this.find("[form-field-id]").trigger("load");
+		this.find("[form-field-id]").trigger("load");
 		
-// 	}
+	}
 	
-	// $.fn.save = function() {
+	$.fn.save = function() {
 		
-	// }
+	}
 	
-	// $.fn.getFormData = function() {
-	// 	var jd = this.serializeArray().concat(this.find("input[type=checkbox]:not(:checked):not(:disabled)").map(function() { return { "name": this.name, "value": this.value=="Y" ? "N" : "" }}).get());
+	$.fn.getFormData = function() {
+		var jd = this.serializeArray().concat(this.find("input[type=checkbox]:not(:checked):not(:disabled)").map(function() { return { "name": this.name, "value": this.value=="Y" ? "N" : "" }}).get());
 
-	// 	$("select[multiple]:not(:disabled)").each(function(index, el) {
-	// 		if($(el).val()==null) {
-	// 			jd = jd.concat({ "name": el.name, "value": "" });
-	// 		}
-	// 	});
+		$("select[multiple]:not(:disabled)").each(function(index, el) {
+			if($(el).val()==null) {
+				jd = jd.concat({ "name": el.name, "value": "" });
+			}
+		});
 		
-	// 	this.find("input[data-type=file-upload]").each(function(index, el) {
-	// 		/*jd.concat({ "name": el.name, "value":  })
+		this.find("input[data-type=file-upload]").each(function(index, el) {
+			/*jd.concat({ "name": el.name, "value":  })
 			
-	//       	formData.append("storage", storageId);
-	//       	formData.append("f" + uploadId, el);
-	//       	*/
+	      	formData.append("storage", storageId);
+	      	formData.append("f" + uploadId, el);
+	      	*/
 
-	// 	});
+		});
 		
+		debugger;
 		
-	// 	return jd;
-	// }
+		return jd;
+	}
 	
-	// $.fn.dynaform.defaults = {
+	$.fn.dynaform.defaults = {
 
-	// 	optionsValidate: {
-	//      	ignore         : '',
-	// 		invalidHandler : function(e, validator){
-	//            if(validator.errorList.length)  
-	//               $('#tabs a[href="#' + $(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
+		optionsValidate: {
+	     	ignore         : '',
+			invalidHandler : function(e, validator){
+	           if(validator.errorList.length)  
+	              $('#tabs a[href="#' + $(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
 	           
-	//         },
+	        },
 
-	//         errorPlacement: function (error, element) {
+	        errorPlacement: function (error, element) {
 	        	
-	//         	var notification = $(element).attr("data-notification-target");
+	        	var notification = $(element).attr("data-notification-target");
 
-	//         	if(notification){
-	//         		error.appendTo(notification);
-	//         	} else {
-	//         		$(element).after(error);
-	//         	}
-	//         }
+	        	if(notification){
+	        		error.appendTo(notification);
+	        	} else {
+	        		$(element).after(error);
+	        	}
+	        }
 
-	// 	},
-	// 	callbackSave: function(e) { 
+		},
+		callbackSave: function(e) { 
 			
-	// 	},
-	// 	callbackDelete: function(e) { 
+		},
+		callbackDelete: function(e) { 
 			
-	// 	},
-	// 	htmlConfirm: '<div class="dynaform-modal modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button><button type="button" class="btn btn-primary">Confirmar</button></div></div></div></div>',
-	// 	htmlAlert:   '<div class="dynaform-modal modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer" style="text-align: center;"><button type="button" class="btn btn-primary">Ok</button></div></div></div></div>'
-	// };
+		},
+		htmlConfirm: '<div class="dynaform-modal modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button><button type="button" class="btn btn-primary">Confirmar</button></div></div></div></div>',
+		htmlAlert:   '<div class="dynaform-modal modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title"></h4></div><div class="modal-body"><p></p></div><div class="modal-footer" style="text-align: center;"><button type="button" class="btn btn-primary">Ok</button></div></div></div></div>'
+	};
 
 })(jQuery);
 
 /* fix for notify */
-// try {
-// 	if (window.top.jQuery.notify) $.notify = window.top.jQuery.notify;
-// } catch(e) {}
+try {
+	if (window.top.jQuery.notify) $.notify = window.top.jQuery.notify;
+} catch(e) {}
 
 /* debounce */
-// function debounce(func, wait, immediate) {
-//     var timeout;
-//     return function() {
-//         var context = this, args = arguments;
-//         var later = function() {
-//             timeout = null;
-//             if (!immediate) func.apply(context, args);
-//         };
-//         var callNow = immediate && !timeout;
-//         clearTimeout(timeout);
-//         timeout = setTimeout(later, wait); 
-//         if (callNow) func.apply(context, args);
-//     };
-// };
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait); 
+        if (callNow) func.apply(context, args);
+    };
+};
 
 /*
  * LocalStorageFactory
@@ -907,78 +908,78 @@ dynaform.filter = function($target, options) {
  * https://gist.github.com/joaovarandas/3c82aaf051b576d59dbec4afe454f533
  * @author jvarandas
  */
-// (function(global) {
-//     var _cache = {}, _ls = {};
+(function(global) {
+    var _cache = {}, _ls = {};
   
-//     var ls;
-//     if (typeof localStorage === 'undefined') {       
-//         ls = {
-//             setItem: function(key, value) {
-//               _ls[key] = value;
-//             },
-//             getItem: function(key) {
-//               return _ls[key];
-//             }            
-//         }
-//     } else {
-//         ls = localStorage;
-//     }
+    var ls;
+    if (typeof localStorage === 'undefined') {       
+        ls = {
+            setItem: function(key, value) {
+              _ls[key] = value;
+            },
+            getItem: function(key) {
+              return _ls[key];
+            }            
+        }
+    } else {
+        ls = localStorage;
+    }
 
-//     function fnAppender(key, value) {
-//         this.data[key] = value;    
+    function fnAppender(key, value) {
+        this.data[key] = value;    
 
-//         return this.data;
-//     }
+        return this.data;
+    }
 
-//     function fnSetter() {
-//         ls.setItem(this.key, JSON.stringify(this.data));
-//     }
+    function fnSetter() {
+        ls.setItem(this.key, JSON.stringify(this.data));
+    }
   
-//     function fnFactory(key) {
+    function fnFactory(key) {
 
-//       if (_cache[key]) 
-//         return _cache[key];
+      if (_cache[key]) 
+        return _cache[key];
 
-//       /* multi-thread issue */
-//       var jsonString = ls.getItem(key);
-//       _cache[key] = jsonString ? JSON.parse(jsonString) : {};
-//       var o = _cache[key];
-//       /* end of multi-thread issue */
+      /* multi-thread issue */
+      var jsonString = ls.getItem(key);
+      _cache[key] = jsonString ? JSON.parse(jsonString) : {};
+      var o = _cache[key];
+      /* end of multi-thread issue */
 
-//       var g = {
-//         "key": key,
-//         "data": o
-//       };
-//       o["set"] = fnSetter.bind(g);
-//       o["append"] = fnAppender.bind(g);
+      var g = {
+        "key": key,
+        "data": o
+      };
+      o["set"] = fnSetter.bind(g);
+      o["append"] = fnAppender.bind(g);
 
-//       return o;
-//     }
+      return o;
+    }
 
-//     global["LocalStorageFactory"] = fnFactory;
+    global["LocalStorageFactory"] = fnFactory;
 
-// })(this);
+})(this);
 
 /* startup */
-// (function($, global, undefined) { 
-// 	function fn_page_load() {
-// 		try {
-// 			var $form = $("form");
+(function($, global, undefined) { 
+	function fn_page_load() {
+		try {
+			var $form = $("form");
 			
-// 			if (global.dynaform !== undefined && $form.length > 0) 
-// 				global.dynaform.init($form); 
+			if (global.dynaform !== undefined && $form.length > 0) 
+				global.dynaform.init($form); 
 				
-// 			// if (window.top && window.top.inPaaS) 					
-// 				// window.top.inPaaS.iframeload( $form.attr("form-key"), $form.find("[record-id]").val() );
-// 		} catch(e) {
+			if (window.top && window.top.inPaaS) 					
+				window.top.inPaaS.iframeload( $form.attr("form-key"), $form.find("[record-id]").val() );
+		} catch(e) {
 			
-// 		}
+		}
 
-// 	}
+	}
 	
-// 	$(document).ready(fn_page_load);
+	$(document).ready(fn_page_load);
 	
-// })(jQuery, this);
+})(jQuery, this);
 
 
 /**
@@ -994,36 +995,36 @@ dynaform.filter = function($target, options) {
     /*
      *
      */
-  //   var require = global.ngRequire = function(id, $scope, global) { 
-  //       if (typeof arguments[0] !== 'string') throw 'USAGE: require(formKey)';
+    var require = global.ngRequire = function(id, $scope, global) { 
+        if (typeof arguments[0] !== 'string') throw 'USAGE: require(formKey)';
          
-  //       var moduleContent = '';
+        var moduleContent = '';
         
-		// if (require._cache[id]) {
-		// 	return require._cache[id];
-  //       }
+		if (require._cache[id]) {
+			return require._cache[id];
+        }
       
-		// $.get({ "url": "/includes/" + id + "/js/" + id + ".js", "dataType": "text" }, function(moduleContent) {          	
-  //        	try {
-  //          		var f = new Function('require', 'module', '$scope', moduleContent);
+		$.get({ "url": "/includes/" + id + "/js/" + id + ".js", "dataType": "text" }, function(moduleContent) {          	
+         	try {
+           		var f = new Function('require', 'module', '$scope', moduleContent);
  
-  //           	require._root.unshift(id);
-  //           	var exports = f.call(global || {}, require, { "id": id }, $scope);
-  //           	require._root.shift();
+            	require._root.unshift(id);
+            	var exports = f.call(global || {}, require, { "id": id }, $scope);
+            	require._root.shift();
               
-		// 	} catch(e) {
-		// 		throw 'Unable to require source code from "' + id + '": ' + e;
+			} catch(e) {
+				throw 'Unable to require source code from "' + id + '": ' + e;
             
-  //         	}
+          	}
 			
-  //           require._cache[id] = exports;
+            require._cache[id] = exports;
           
-  //         	if (typeof(cb) == "function") cb(exports);
-  //       });      
-  //   }
+          	if (typeof(cb) == "function") cb(exports);
+        });      
+    }
     
-  //   require._root = [''];
-  // 	require._cache = {};  
+    require._root = [''];
+  	require._cache = {};  
   
   	var prepare = global.ngPrepare = function() {
       	document.body.setAttribute("data-ng-app", "dynaform");
@@ -1056,34 +1057,34 @@ dynaform.filter = function($target, options) {
         // ctrl.setReady(false);
 
         
-		// ngDynaForm.directive('inpaasFormInclude', function() {
-		// 	var contentUrl;
+		ngDynaForm.directive('inpaasFormInclude', function() {
+			var contentUrl;
 
-		// 	return {
-		// 		restrict : "E",
-		// 		scope : false,
-		// 		replace : true,
-		// 		link : function($scope, element, attrs) {
-  //                 	var formId = attrs["formId"];
-		// 			var ctrlProto = Object.getPrototypeOf($scope.formController);
-  //                 	dynaform.ngRequire(formId, $scope, ctrlProto);
+			return {
+				restrict : "E",
+				scope : false,
+				replace : true,
+				link : function($scope, element, attrs) {
+                  	var formId = attrs["formId"];
+					var ctrlProto = Object.getPrototypeOf($scope.formController);
+                  	dynaform.ngRequire(formId, $scope, ctrlProto);
 
-  //                 	// add the css to head
-  //                   var ssref=document.createElement("link");
-  //                   ssref.setAttribute("rel", "stylesheet")
-  //                   ssref.setAttribute("type", "text/css")
-  //                   ssref.setAttribute("href", "/includes/" + formId + "/css/" + formId + ".css")
+                  	// add the css to head
+                    var ssref=document.createElement("link");
+                    ssref.setAttribute("rel", "stylesheet")
+                    ssref.setAttribute("type", "text/css")
+                    ssref.setAttribute("href", "/includes/" + formId + "/css/" + formId + ".css")
 
-  //                   if (typeof(ssref)!="undefined")
-  //                       document.getElementsByTagName("head")[0].appendChild(ssref)
+                    if (typeof(ssref)!="undefined")
+                        document.getElementsByTagName("head")[0].appendChild(ssref)
                   
-  //               },
-		// 		templateUrl : function(elem, attrs) {
-		// 			return '/forms/' + attrs["formId"];
+                },
+				templateUrl : function(elem, attrs) {
+					return '/forms/' + attrs["formId"];
 
-		// 		}
-		// 	}
-		// })
+				}
+			}
+		})
 
 		ngDynaForm.controller("DynaFormController", [ '$scope', ctrl ]);
       	
