@@ -901,64 +901,64 @@ function debounce(func, wait, immediate) {
     };
 };
 
-/*
- * LocalStorageFactory
- * enables the use of JSON objects in the localStorage
- * 
- * https://gist.github.com/joaovarandas/3c82aaf051b576d59dbec4afe454f533
- * @author jvarandas
- */
-(function(global) {
-    var _cache = {}, _ls = {};
+// /*
+//  * LocalStorageFactory
+//  * enables the use of JSON objects in the localStorage
+//  * 
+//  * https://gist.github.com/joaovarandas/3c82aaf051b576d59dbec4afe454f533
+//  * @author jvarandas
+//  */
+// (function(global) {
+//     var _cache = {}, _ls = {};
   
-    var ls;
-    if (typeof localStorage === 'undefined') {       
-        ls = {
-            setItem: function(key, value) {
-              _ls[key] = value;
-            },
-            getItem: function(key) {
-              return _ls[key];
-            }            
-        }
-    } else {
-        ls = localStorage;
-    }
+//     var ls;
+//     if (typeof localStorage === 'undefined') {       
+//         ls = {
+//             setItem: function(key, value) {
+//               _ls[key] = value;
+//             },
+//             getItem: function(key) {
+//               return _ls[key];
+//             }            
+//         }
+//     } else {
+//         ls = localStorage;
+//     }
 
-    function fnAppender(key, value) {
-        this.data[key] = value;    
+//     function fnAppender(key, value) {
+//         this.data[key] = value;    
 
-        return this.data;
-    }
+//         return this.data;
+//     }
 
-    function fnSetter() {
-        ls.setItem(this.key, JSON.stringify(this.data));
-    }
+//     function fnSetter() {
+//         ls.setItem(this.key, JSON.stringify(this.data));
+//     }
   
-    function fnFactory(key) {
+//     function fnFactory(key) {
 
-      if (_cache[key]) 
-        return _cache[key];
+//       if (_cache[key]) 
+//         return _cache[key];
 
-      /* multi-thread issue */
-      var jsonString = ls.getItem(key);
-      _cache[key] = jsonString ? JSON.parse(jsonString) : {};
-      var o = _cache[key];
-      /* end of multi-thread issue */
+//       /* multi-thread issue */
+//       var jsonString = ls.getItem(key);
+//       _cache[key] = jsonString ? JSON.parse(jsonString) : {};
+//       var o = _cache[key];
+//       /* end of multi-thread issue */
 
-      var g = {
-        "key": key,
-        "data": o
-      };
-      o["set"] = fnSetter.bind(g);
-      o["append"] = fnAppender.bind(g);
+//       var g = {
+//         "key": key,
+//         "data": o
+//       };
+//       o["set"] = fnSetter.bind(g);
+//       o["append"] = fnAppender.bind(g);
 
-      return o;
-    }
+//       return o;
+//     }
 
-    global["LocalStorageFactory"] = fnFactory;
+//     global["LocalStorageFactory"] = fnFactory;
 
-})(this);
+// })(this);
 
 /* startup */
 (function($, global, undefined) { 
