@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var titleNotification = "Plusoft OmniChat";
-  toastr.options = {
+
+  	toastr.options = {
 	  "closeButton": true,
 	  "debug": false,
 	  "newestOnTop": false,
@@ -19,10 +20,24 @@ $(document).ready(function() {
 	}
 
   /* Embedded status listener */
-  $(window).on("plusoftOmniEmbeddedOpened", function(){ toastr["success"]("Embedded aberto.", titleNotification) });
-  $(window).on("plusoftOmniEmbeddedMinimized", function(){ toastr["success"]("Embedded minimizado.", titleNotification) });
-  $(window).on("plusoftOmniEmbeddedClosed", function(){ toastr["success"]("Embedded fechado", titleNotification) });
-  $(window).on("plusoftOmniEmbeddedChatStarted", function(){ toastr["success"]("Embedded chat iniciado", titleNotification) });
-  $(window).on("plusoftOmniEmbeddedChatRestarted", function(){ toastr["success"]("Embedded chat reiniciado", titleNotification) });
-  $(window).on("plusoftOmniEmbeddedChatClosed", function(){ toastr["success"]("Embedded chat finalizado", titleNotification) });
+  $(window).on("plusoftOmniEmbeddedOpened", function(){ sendNotificaton("Embedded aberto"); updateVariables(); });
+  $(window).on("plusoftOmniEmbeddedMinimized", function(){ sendNotificaton("Embedded minimizado"); updateVariables(); });
+  $(window).on("plusoftOmniEmbeddedClosed", function(){ sendNotificaton("Embedded fechado"); updateVariables(); });
+
+  /* Chat status listener */
+  $(window).on("plusoftOmniEmbeddedChatInit", function(){ sendNotificaton("Embedded chat na tela de apresentação"); updateVariables(); });
+  $(window).on("plusoftOmniEmbeddedChatQueue", function(){ sendNotificaton("Embedded chat em fila"); updateVariables(); });
+  $(window).on("plusoftOmniEmbeddedChatStarted", function(){ sendNotificaton("Embedded chat iniciado"); updateVariables(); });
+  $(window).on("plusoftOmniEmbeddedChatRestarted", function(){ sendNotificaton("Embedded chat reiniciado"); updateVariables(); });
+  $(window).on("plusoftOmniEmbeddedChatFinished", function(){ sendNotificaton("Embedded chat finalizado"); updateVariables(); });
+
+
+  function sendNotificaton(msg) {
+  	toastr["success"](msg, titleNotification);
+  }
+
+
+  function updateVariables() {
+
+  }
 });
