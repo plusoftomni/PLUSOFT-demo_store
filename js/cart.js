@@ -32,33 +32,33 @@ $(document).ready(function() {
   };
 
   /* external actions of embedded */
-  $("#opene").on("click", function(e) { openChat(); });
-  $("#minimizee").on("click", function(e) { minimizeChat(); });
-  $("#closee").on("click", function(e) { closeChat(); });
-  $("#datae").on("click", function(e) { sendDataChat(); });
+  // $("#opene").on("click", function(e) { openChat(); });
+  // $("#minimizee").on("click", function(e) { minimizeChat(); });
+  // $("#closee").on("click", function(e) { closeChat(); });
+  // $("#datae").on("click", function(e) { sendDataChat(); });
 
-  function openChat() {
-  	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
-  	  new window.plusoftOmniChat.messageBroadcaster("omnichat.open_conversation", "open", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
-  	}
-  }
+  // function openChat() {
+  // 	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
+  // 	  new window.plusoftOmniChat.messageBroadcaster("omnichat.open_conversation", "open", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
+  // 	}
+  // }
 
-  function minimizeChat() {
-  	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
-  	  new window.plusoftOmniChat.messageBroadcaster("omnichat.minimize_conversation", "minimize", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
-  	}	
-  }
+  // function minimizeChat() {
+  // 	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
+  // 	  new window.plusoftOmniChat.messageBroadcaster("omnichat.minimize_conversation", "minimize", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
+  // 	}	
+  // }
 
-  function closeChat() {
-  	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
-  	  new window.plusoftOmniChat.messageBroadcaster("omnichat.minimize_conversation", "minimize", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
-  	}
-  }
-  function sendDataChat() {
-  	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true && window.plusoftOmniChat.conversation == "active") {
-  	  window.plusoftOmniChat.updateUserData({"key": "plusoft-test", "value":"teste"});
-  	}
-  }
+  // function closeChat() {
+  // 	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
+  // 	  new window.plusoftOmniChat.messageBroadcaster("omnichat.minimize_conversation", "minimize", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
+  // 	}
+  // }
+  // function sendDataChat() {
+  // 	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true && window.plusoftOmniChat.conversation == "active") {
+  // 	  window.plusoftOmniChat.updateUserData({"key": "plusoft-test", "value":"teste"});
+  // 	}
+  // }
   
 
   /* Embedded status listener */
