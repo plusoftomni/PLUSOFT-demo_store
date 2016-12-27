@@ -19,6 +19,20 @@ $(document).ready(function() {
 	  "hideMethod": "fadeOut"
 	}
 
+  /* example listen timer  */
+  var myInterval = setInterval(function() {
+     executor();
+  },1000);
+
+  var executor = function () {
+  	if ( window.plusoftOmniChat && window.plusoftOmniChat.loaded == true ) {
+  	  updateVariables();
+  	  clearInterval(myInterval);	
+  	}
+  };
+
+  
+
   /* Embedded status listener */
   $(window).on("plusoftOmniEmbeddedOpened", function(){ sendNotificaton("Embedded aberto"); updateVariables(); });
   $(window).on("plusoftOmniEmbeddedMinimized", function(){ sendNotificaton("Embedded minimizado"); updateVariables(); });
@@ -38,6 +52,10 @@ $(document).ready(function() {
 
 
   function updateVariables() {
-
+  	$("#statusLoaded").find(".value").text(window.plusoftOmniChat.loaded);
+  	$("#statusConversation").find(".value").text(window.plusoftOmniChat.status.conversation);
+  	$("#statusEmbedded").find(".value").text(window.plusoftOmniChat.status.embedded);
+  	$("#controlRestarted").find(".value").text(window.plusoftOmniChat.control.restarted);
+  	$("#controlFinished").find(".value").text(window.plusoftOmniChat.control.finished);
   }
 });
