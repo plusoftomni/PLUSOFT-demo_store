@@ -31,6 +31,9 @@ $(document).ready(function() {
   	}
   };
 
+  /* external actions of embedded */
+  
+
   
 
   /* Embedded status listener */
