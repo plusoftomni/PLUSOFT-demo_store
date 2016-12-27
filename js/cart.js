@@ -32,7 +32,7 @@ $(document).ready(function() {
   };
 
   /* external actions of embedded */
-  $("#opene").on("click", function(e) { if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) { new window.plusoftOmniChat.messageBroadcaster("omnichat.open_conversation", "open", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: context, origin: "internal" }); } });
+  $("#opene").on("click", function(e) { if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) { new window.plusoftOmniChat.messageBroadcaster("omnichat.open_conversation", "open", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" }); } });
   $("#minimizee").on("click", function(e) {  });
   $("#closee").on("click", function(e) {  });
   $("#datae").on("click", function(e) {  });
