@@ -51,7 +51,7 @@ $(document).ready(function() {
 
   function closeChat() {
   	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
-  	  new window.plusoftOmniChat.messageBroadcaster("omnichat.minimize_conversation", "minimize", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
+  	  new window.plusoftOmniChat.messageBroadcaster("omnichat.close_conversation", "close", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
   	}
   }
   function sendDataChat() {
