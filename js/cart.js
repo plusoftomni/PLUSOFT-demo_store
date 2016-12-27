@@ -33,10 +33,9 @@ $(document).ready(function() {
 
   /* external actions of embedded */
   $("#opene").on("click", function(e) { if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) { new window.plusoftOmniChat.messageBroadcaster("omnichat.open_conversation", "open", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" }); } });
-  $("#minimizee").on("click", function(e) {  });
-  $("#closee").on("click", function(e) {  });
-  $("#datae").on("click", function(e) {  });
-  $("#varse").on("click", function(e) {  });
+  $("#minimizee").on("click", function(e) { if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) { new window.plusoftOmniChat.messageBroadcaster("omnichat.minimize_conversation", "open", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" }); } });
+  $("#closee").on("click", function(e) { if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) { new window.plusoftOmniChat.messageBroadcaster("omnichat.finish_conversation", "open", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" }); } });
+  $("#datae").on("click", function(e) function(e) { if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true && window.plusoftOmniChat.conversation == "active") { window.plusoftOmniChat.updateUserData({"key": "plusoft-test", "value":"teste"}) }});
 //omnichat.open_conversation
   
 
