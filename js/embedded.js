@@ -19,16 +19,14 @@ $(document).ready(function() {
 	  "hideMethod": "fadeOut"
 	}
 
-  /* example listen timer  */
-  var myInterval = setInterval(function() {
-     executor();
-  },1000);
 
-  var executor = function () {
-  	if ( window.plusoftOmniChat && window.plusoftOmniChat.loaded == true ) {
-  	  updateVariables();
-  	  clearInterval(myInterval);	
-  	}
+  /* example listener variables */
+  var intervalVariables = setInterval(function() {
+  	internalVariablesFn();
+  }, 1000);
+
+  var internalVariablesFn = function(){
+  	updateVariables();
   };
 
   /* external actions of embedded */
@@ -40,38 +38,46 @@ $(document).ready(function() {
   function openChat() {
   	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
   	  new window.plusoftOmniChat.messageBroadcaster("omnichat.open_conversation", "open", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
+  	} else {
+  		toastr["error"]("Embedded não carregado", titleNotification);
   	}
   }
 
   function minimizeChat() {
   	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
   	  new window.plusoftOmniChat.messageBroadcaster("omnichat.minimize_conversation", "minimize", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
+  	} else {
+  		toastr["error"]("Embedded não carregado", titleNotification);
   	}	
   }
 
   function closeChat() {
   	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true) {
   	  new window.plusoftOmniChat.messageBroadcaster("omnichat.close_conversation", "close", { serialize: true, domains: ["https:" + window.plusoftOmniChat.base], context: document.getElementById("plusoftOmniChatMain").contentWindow, origin: "internal" });
+  	} else {
+  		toastr["error"]("Embedded não carregado", titleNotification);
   	}
   }
   function sendDataChat() {
   	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true && window.plusoftOmniChat.conversation == "active") {
   	  window.plusoftOmniChat.updateUserData({"key": "plusoft-test", "value":"teste"});
+  	} else {
+  		toastr["error"]("Embedded não carregado e/ou sem conversa ativa", titleNotification);
   	}
   }
   
 
   /* Embedded status listener */
-  $(window).on("plusoftOmniEmbeddedOpened", function(){ sendNotificaton("Embedded aberto"); updateVariables(); });
-  $(window).on("plusoftOmniEmbeddedMinimized", function(){ sendNotificaton("Embedded minimizado"); updateVariables(); });
-  $(window).on("plusoftOmniEmbeddedClosed", function(){ sendNotificaton("Embedded fechado"); updateVariables(); });
+  $(window).on("plusoftOmniEmbeddedOpened", function(){ sendNotificaton("Embedded aberto"); });
+  $(window).on("plusoftOmniEmbeddedMinimized", function(){ sendNotificaton("Embedded minimizado"); });
+  $(window).on("plusoftOmniEmbeddedClosed", function(){ sendNotificaton("Embedded fechado"); });
 
   /* Chat status listener */
-  $(window).on("plusoftOmniEmbeddedChatInit", function(){ sendNotificaton("Embedded chat na tela de apresentação"); updateVariables(); });
-  $(window).on("plusoftOmniEmbeddedChatQueue", function(){ sendNotificaton("Embedded chat em fila"); updateVariables(); });
-  $(window).on("plusoftOmniEmbeddedChatStarted", function(){ sendNotificaton("Embedded chat iniciado"); updateVariables(); });
-  $(window).on("plusoftOmniEmbeddedChatRestarted", function(){ sendNotificaton("Embedded chat reiniciado"); updateVariables(); });
-  $(window).on("plusoftOmniEmbeddedChatFinished", function(){ sendNotificaton("Embedded chat finalizado"); updateVariables(); });
+  $(window).on("plusoftOmniEmbeddedChatInit", function(){ sendNotificaton("Embedded chat na tela de apresentação"); });
+  $(window).on("plusoftOmniEmbeddedChatQueue", function(){ sendNotificaton("Embedded chat em fila"); });
+  $(window).on("plusoftOmniEmbeddedChatStarted", function(){ sendNotificaton("Embedded chat iniciado"); });
+  $(window).on("plusoftOmniEmbeddedChatRestarted", function(){ sendNotificaton("Embedded chat reiniciado"); });
+  $(window).on("plusoftOmniEmbeddedChatFinished", function(){ sendNotificaton("Embedded chat finalizado"); });
 
 
   function sendNotificaton(msg) {
