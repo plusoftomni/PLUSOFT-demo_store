@@ -59,7 +59,7 @@ $(document).ready(function() {
   	}
   }
   function sendDataChat() {
-  	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true && window.plusoftOmniChat.conversation == "active") {
+  	if (window.plusoftOmniChat && window.plusoftOmniChat.loaded == true && window.plusoftOmniChat.status.conversation == "active") {
   	  window.plusoftOmniChat.updateUserData({"key": "plusoft-test", "value":"teste"});
   	} else {
   		toastr["error"]("Embedded não carregado e/ou sem conversa ativa", titleNotification);
