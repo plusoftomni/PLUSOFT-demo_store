@@ -233,7 +233,7 @@
       <div class="row">
 
         <!-- Content -->
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="margin-top: 10px;">
           <div class="title"><span>Variáveis</span></div>
           <div class="box-product">
             <ul style="list-style: none; font-size: 12px;padding: 0;">
@@ -246,13 +246,30 @@
           </div>
         </div>
 
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="margin-top: 10px;">
           <div class="title"><span>Controle externo</span></div>
           <div class="box-product">
             <button id="opene" class="btn btn-theme m-b-1" type="button"> Abrir embedded</button>
             <button id="minimizee" class="btn btn-theme m-b-1" type="button"> Minimizar embedded</button>
             <button id="closee" class="btn btn-theme m-b-1" type="button"> Fechar embedded</button>
             <button id="datae" class="btn btn-theme m-b-1" type="button"> Enviar dados</button>
+          </div>
+        </div>
+
+        <div class="col-sm-12" style="margin-top: 10px;">
+          <div class="title"><span>Preenchimento do formulário externamente</span></div>
+          <div class="box-product">
+            <pre>
+              <!-- Start of pre-set of data input -->
+              <script>
+                window.plusoftOmniChat = window.plusoftOmniChat || {};
+                window.plusoftOmniChat.userData = {
+                  "name": "Plusoft teste",
+                  "email1": "teste@plusoft.com.br"
+                }
+              </script>
+              <!-- End of pre-set of data input -->
+            </pre>
           </div>
         </div>
         <!-- End Content -->
@@ -382,6 +399,17 @@
     <script src="js/mimity.js"></script>
     <script src="js/toastr.min.js"></script>
     <script src="js/embedded.js"></script>
+
+    <!-- Start of pre-set of data input -->
+    <script>
+    window.plusoftOmniChat = window.plusoftOmniChat || {};
+    window.plusoftOmniChat.userData = {
+      "name": "Plusoft teste",
+      "email1": "teste@plusoft.com.br"
+    }
+    </script>
+    <!-- End of pre-set of data input -->
+
     <!--Start of Plusoft Omni Chat Script-->
     <script type="text/javascript">
     window.plusoftOmniChat=window.plusoftOmniChat||{};window.plusoftOmniChat.code="cXQWZ6COePms7Wa5QYfy4cVMUWVjMVab73irrskrIwMWib1CfBv3Cw==";window.plusoftOmniChat.pmode=0;
